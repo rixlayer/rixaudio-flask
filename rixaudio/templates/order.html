@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+   <!-- cart -->
+    <section>
+        <div class="card bg-light p-search x-shadow">
+            <div class="card-body">
+                <h4 class="card-title">Your Cart</h4>
+                
+                <div style="height:20px"></div>
+
+                <div id="pSearchResults" class="card-deck justify-content-center" style="display:flex">
+                    
+                    {% for p in order.products%}
+                        <div class="card p-c-search x-card x-shadow col-sm-2" onclick="location.href='{{ url_for('main.product', pid=p.id) }}'">
+                            <h6>{{p.name}}</h6>
+                            <img class="card-img-top" src="{{url_for('static', filename='img/products/'+p.image)}}" alt="{{p.name}} Image">
+                            <p class="text-primary p-s-r-txt">A${{p.price}}</p>
+
+                            <!-- delete item -->
+                            <form method="POST" action="{{url_for('main.deleteorderitem')}}" class="w-100">
+                                <input type="hidden" id="id" name="id" value="{{p.id}}">
+                                <input type="submit" value="Remove" class="btn btn-outline-danger w-100 btn-sm p-s-r-btn" style="border-radius:20px">
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- checkout -->
+    <section>
+        <div class="card bg-light x-card x-shadow">
+            <div class="card-body col-sm-12">
+                <div class="row justify-content-center">
+
+                    <!-- view cart -->
+                    <div class="col-sm-2" style="text-align:center">
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.href='{{ url_for('main.subbs', subbid='RE') }}'">Continue Shopping</button>
+                    </div>
+
+                    <!-- empty cart -->
+                    <div class="col-sm-2" style="text-align:center">
+                        <a href="{{ url_for('main.deleteorder') }}" class="btn btn-outline-danger">Empty Cart</a>
+                    </div>
+
+                    <!-- total price -->
+                    <div class="col-sm-3">
+                        <h2 style="text-align:center"> A${{ "%.2f"|format(totalprice) }} </h2>
+                    </div>
+
+                    <!-- checkout -->
+                    <div class="col-sm-2" style="text-align:center">
+                        <a href="{{ url_for('main.checkout') }}" class="btn btn-secondary">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+

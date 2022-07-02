@@ -1,0 +1,95 @@
+SUBBRAND
+    Header 16:9
+    /products
+        REcover.png
+        RScover.png
+        RHcover.png
+    
+    Category 1:1
+    /products
+        reno.png
+        resp.png
+        rhea.png
+
+PRODUCT
+    Header 16:9, 18:9
+    /products
+        r1.png (reuse INDEX.ProductThumbs)
+        r2.png (reuse INDEX.ProductThumbs)
+        r3.png (reuse INDEX.ProductThumbs)
+        r4.png (reuse INDEX.ProductThumbs)
+        r5.png (reuse INDEX.ProductThumbs)
+        r6.png (reuse INDEX.ProductThumbs)
+        r7.png (reuse INDEX.ProductThumbs)
+        c_r1.png (reuse PRODUCT.FeatureImage)
+        c_r2.png (reuse PRODUCT.FeatureImage)
+        c_r3.png (reuse PRODUCT.FeatureImage)
+        c_r4.png (reuse PRODUCT.FeatureImage)
+        c_r5.png (reuse PRODUCT.FeatureImage)
+        c_r6.png (reuse PRODUCT.FeatureImage)
+        c_r7.png (reuse PRODUCT.FeatureImage)
+
+    FeatureImage 18:9
+    /products
+        c_r1.png
+        c_r2.png
+        c_r3.png
+        c_r4.png
+        c_r5.png
+        c_r6.png
+        c_r7.png
+
+    SubBrands 1:1
+    /products
+        reno.png (reuse SUBBRAND.Category)
+        resp.png (reuse SUBBRAND.Category)
+        rhea.png (reuse SUBBRAND.Category)
+
+INDEX
+    Carousels 16:9
+    /products
+        REcover.png (reuse SUBBRAND.Header)
+        RScover.png (reuse SUBBRAND.Header)
+        RHcover.png (reuse SUBBRAND.Header)
+    
+    SubBrands 1:1
+    /products
+        reno.png (reuse SUBBRAND.Category)
+        resp.png (reuse SUBBRAND.Category)
+        rhea.png (reuse SUBBRAND.Category)
+    
+    ProductThumbs 1:1
+    /products
+        r1.png
+        r2.png
+        r3.png
+        r4.png
+        r5.png
+        r6.png
+        r7.png
+
+    PartnersLogos 1:1
+    /logos
+        fc.png
+        hiq.png
+        qes.png
+        qg.png
+        qut.png
+        sef.png
+
+    SocialIcons 1:1
+    /social
+        fb.png
+        in.png
+        li.png
+        tw.png
+        yt.png
+
+CHECKOUT
+    SocialIcons 1:1
+    /social
+        fb.png (reuse INDEX.SocialIcons)
+        in.png (reuse INDEX.SocialIcons)
+        li.png (reuse INDEX.SocialIcons)
+        tw.png (reuse INDEX.SocialIcons)
+        yt.png (reuse INDEX.SocialIcons)

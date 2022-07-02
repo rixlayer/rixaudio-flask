@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    {% for p in product%}
+        <!-- product header -->
+        <section>
+            <div id="productCarouselIndicator" class="carousel slide" data-ride="carousel">       
+                <div class="carousel-inner p-carousel" role="listbox">
+                    <!-- carousel content -->
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" href="#" src="{{url_for('static', filename='img/products/'+p.image)}}" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" href="#" src="{{url_for('static', filename='img/products/c_'+p.image)}}" alt="Second slide">
+                    </div>
+                </div>
+                <div class="carousel-caption p-carousel-caption d-md-block">
+                    <h1 class="p-title">RIX {{p.name}}</h1>
+                    <form action="{{ url_for('main.order') }}">
+                        <input type="hidden" id="p_id" name="p_id" value="{{ p.id }}">
+                        <input class="btn btn-outline-light" type="submit" value="Buy now for A${{p.price}}">
+                    </form>
+                </div>
+            </div>   
+        </section>
+
+        <!-- info section -->
+        <section>
+            <div class="card bg-light x-card x-shadow">
+                <div class="card-body container col-sm-12">
+                    <div class="row justify-content-center">
+
+                        <!-- image -->
+                        <div class="col-sm-8">
+                            <div class="col-img-limit">
+                                <img src="{{url_for('static', filename='img/products/c_'+p.image)}}" alt="Product image">
+                            </div>
+                        </div>
+
+                        <!-- deets -->
+                        <div class="col-mr-4" >
+                            <table class="table table-borderless" style="margin: 0 0 0 10px">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">{{p.desc}}</td>
+                                    </tr>
+
+                                    <!--
+                                        
+                                        NB: IN PRODUCTION THE PLACEHOLDER BELOW
+                                            WOULD BE REPLACED BY A FUNCTIONAL FEATURE LIST
+
+                                        Feature - a table of generic (not product specific) features
+                                            id(PK), feature
+                                        featuremap - a branching table that maps each product to a feature 
+                                            { feature_id(FK), product_id(FK) }= PK
+                                        
+                                        from featuremap where featuremap.product_id == product.id 
+                                        
+                                        ^ would be passed used to fetch list through the product() route 
+                                        for /product/<product.id>/ and passed as features to this template
+
+                                        and then mapped with jinja...   f in features which would loop 
+                                        to make a row for each item
+
+                                    -->
+
+                                    <!-- START OF FEATURE PLACEHOLDER AREA -->
+                                    <tr>
+                                        <td colspan="2">Superior Sound with a Punchy Bass</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Automatic pop-up pairing</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Environment Noise cancellation</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Optical sensors for in-ear detection</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Tap playback controls</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">4hr Single use battery life</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">14hr playback with case</td>
+                                    </tr>
+                                    <!-- END OF FEATURE PLACEHOLDER AREA -->
+
+                                    <tr>
+                                        <td>Model</td>
+                                        <td>{{p.model}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net Weight</td>
+                                        <td>{{p.weight}}g</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- buy the thang -->
+        <section>
+            <div class="card bg-light x-card x-shadow">
+                <div class="card-body col-sm-12">
+                    <div class="row justify-content-center">
+
+                        <!-- view cart -->
+                        <div class="col-sm-2" style="text-align:center">
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.href='{{ url_for('main.subbs', subbid=p.subb_id) }}'">View Products</button>
+                        </div>
+
+                        <!-- view cart -->
+                        <div class="col-sm-2" style="text-align:center">
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.href='{{url_for('main.order')}}'">View Cart</button>
+                        </div>
+
+                        <!-- price -->
+                        <div class="col-sm-3">
+                            <h2 style="text-align:center"> A${{p.price}} </h2>
+                        </div>
+
+                        <!-- cart -->
+                        <div class="col-sm-2" style="text-align:center">
+                            <form action="{{ url_for('main.order') }}">
+                                <input type="hidden" id="p_id" name="p_id" value="{{ p.id }}">
+                                <input class="btn btn-secondary" type="submit" value="Add to Cart">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- contact -->
+        <section>
+        <div class="card bg-light testim x-shadow">
+            <div class="card-body">
+            <div class="container">
+                <div class="row justify-content-around">
+                
+                <div class="col-sm-8">
+                <h4 class="card-title">We'd like to hear you out</h4>
+                <div style="height:20px"></div>
+                    <form>
+                    <div class="form-group">
+                        <textarea class="span6 form-control" rows="3" id="formGroupExampleInput" placeholder="Tell us what you think of the {{p.name}}" required></textarea>
+                    </div>
+                    <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email ID">
+                        <div class="input-group-append">
+                        <span class="input-group-text">Send</span>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- search -->
+        <section>
+            <div class="card bg-light p-search x-shadow">
+                <div class="card-body">
+                    <h4 class="card-title">Doesn't feel like the right one? There's&nbsp;more</h4>
+                    
+                    <div style="height:20px"></div>
+
+                    <!-- product categories -->
+                    <section>
+                    <div class="card-group">
+
+                        {% for subb in subbrands%}
+                            <div class="card c-cat">
+                                <img class="card-img" src="{{url_for('static', filename='img/products/'+subb.image)}}" alt="{{subb.name}} Sample">
+                                <div class="card-img-overlay">
+                                    <p class="card-text p-c-txt" data-desc=" Series" onclick="location.href='{{ url_for('main.subbs', subbid=subb.id) }}'">{{subb.name}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<section>
+    <section>
+        <div id="productCarouselIndicator" class="carousel slide" data-ride="carousel">       
+            <div class="carousel-inner p-carousel" role="listbox">
+
+                <!-- carousel content -->
+                {% for s in subbrand%}
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" href="#" src="{{url_for('static', filename='img/products/'+s.id+'cover.png')}}" alt="First slide">
+                    </div>
+                    <div class="carousel-caption p-carousel-caption d-md-block">
+                        <h1 class="p-title">{{s.name}}</h1>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>   
+    </section>
+
+    <section>
+        <div class="card bg-light p-search x-shadow">
+            <div class="card-body">
+                
+                <!-- subbrand radio group-->
+                <div class="container col-mr-8">
+                    <div class="row justify-content-center">
+
+                        <div class="btn-group btn-group-toggle p-s-select text-center" data-toggle="buttons">
+                            {% for s in subbrand%}
+                                {% for subb in subbrands%}
+                                    {% if s != subb%}
+                                    <label name="seriesRadio" class="btn btn-outline-dark" onclick="location.href='{{ url_for('main.subbs', subbid=subb.id) }}'">
+                                        <input type="radio" name="options" id="option_{{subb.id}}" autocomplete="off">{{subb.name}}</label>
+                                    {% endif %}
+                                    {% if s == subb%}
+                                    <label name="seriesRadio" class="btn btn-outline-dark active">
+                                        <input type="radio" name="options" id="option_{{subb.id}}" autocomplete="off">{{subb.name}}</label>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- search results | product list -->
+                <div id="pSearchResults" class="card-deck justify-content-center" style="display:flex">
+                    {% for p in products%}
+                        <div class="card p-c-search x-card x-shadow col-sm-2">
+                            <h6>{{p.name}}</h6>
+                            <img class="card-img-top" src="{{url_for('static', filename='img/products/'+p.image)}}" alt="{{p.name}} Image">
+                            <p class="text-primary p-s-r-txt">{{p.price}}</p>
+                            <button type="button" class="btn btn-light w-100 btn-sm p-s-r-btn" style="border-radius:20px" onclick="location.href='{{ url_for('main.product', pid=p.id) }}'">View Details</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- product categories -->
+    <section>
+      <div class="card-group">
+
+        {% for subb in subbrands%}
+            <div class="card c-cat">
+                <img class="card-img" src="{{url_for('static', filename='img/products/'+subb.image)}}" alt="{{subb.name}} Sample">
+                <div class="card-img-overlay">
+                    <p class="card-text p-c-txt" data-desc=" Series" onclick="location.href='{{ url_for('main.subbs', subbid=subb.id) }}'">{{subb.name}}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+      </div>
+    </section>
+
+</section>
+{% endblock %}
+

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+
+    <!-- checkout -->
+    <section>
+      <div class="card bg-light testim x-shadow">
+        <div class="card-body">
+          <div class="container">
+            <div class="row justify-content-around">
+            
+            <!-- checkout -->
+            <div class="col-sm-6">
+              <h4 class="card-title">Checkout</h4>
+              <p>Billing and delivery details.</p>
+              <div style="height:20px"></div>
+                    {{wtf.quick_form(form)}}
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </section>
+    
+    <!-- subscribe -->
+    <section>
+      <div class="card bg-light testim x-shadow">
+        <div class="card-body">
+          <div class="container">
+            <div class="row justify-content-around">
+              
+              <div class="col-sm-6">
+                <h4 class="card-title">Let's Stay in touch</h4>
+                <p class="card-title">Get updates on sales specials and more</p>
+                <div class="row justify-content-around">
+                  <div class="col-sm-8">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Email ID">
+                      <div class="input-group-append">
+                        <span class="input-group-text">Subscribe</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6">
+                <div style="height:10px"></div>
+                <h4 class="card-title">Follow Us</h4>
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <img class="social-logo col-sm-2" src="{{url_for('static', filename='img/social/fb.png')}}"/>
+                    <img class="social-logo col-sm-2" src="{{url_for('static', filename='img/social/in.png')}}"/>
+                    <img class="social-logo col-sm-2" src="{{url_for('static', filename='img/social/tw.png')}}"/>
+                    <img class="social-logo col-sm-2" src="{{url_for('static', filename='img/social/li.png')}}"/>
+                    <img class="social-logo col-sm-2" src="{{url_for('static', filename='img/social/yt.png')}}"/>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
