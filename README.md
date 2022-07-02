@@ -105,4 +105,4 @@ Assessment 2
  - E-Commerce Store
   - Python Flask
 
-Semester One, 2020
+Semester One, June 2020
